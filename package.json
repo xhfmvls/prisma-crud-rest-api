@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "REST API with NodeJs, Express, and Prisma ORM",
   "main": "app.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1", 
+    "dev": "nodemon ."
   },
   "repository": {
     "type": "git",
