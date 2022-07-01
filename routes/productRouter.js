@@ -1,9 +1,9 @@
-import { getProducts } from "../controllers/productController.js";
+import { getProducts, postProduct } from "../controllers/productController.js";
 import Router from "express"; 
 
 const router = Router();
 
-router.route('/').get(getProducts); 
+router.route('/').get(getProducts).post(postProduct); 
 
 
 

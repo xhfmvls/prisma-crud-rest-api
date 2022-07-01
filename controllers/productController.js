@@ -15,20 +15,30 @@ export const getProducts = async (req, res, next) => {
 
     return res.status(200).json({
         success: true,
-        count: products.length, 
+        count: products.length,
         products: products
     });
 };
 
-export const getProduct = async (req, res, next) => {
-    const { id, name, price, categoryId } = req.body
+export const postProduct = async (req, res, next) => {
+    const { name, price, categoryId } = req.body
+
+    const product = await prisma.Product.create({
+        data: {
+            id: generateId(),
+            name: name,
+            price: price,
+            categoryId: categoryId
+        }
+    });
 
     return res.status(200).json({
         success: true,
+        product: product
     });
 };
 
-export const postProduct = async (req, res, next) => {
+export const getProduct = async (req, res, next) => {
 
 
     return res.status(200).json({
