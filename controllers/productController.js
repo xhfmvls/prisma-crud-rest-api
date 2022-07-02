@@ -75,9 +75,19 @@ export const deleteProduct = async (req, res, next) => {
 };
 
 export const patchProduct = async (req, res, next) => {
-
+    const { productId, productData } = req.body; 
+    const updatedProduct = await prisma.Product.update({
+        where: {
+            id: productId
+        }, 
+        data: productData, 
+        include: {
+            Category: true
+        }
+    }); 
 
     return res.status(200).json({
         success: true,
+        updatedProduct: updatedProduct
     });
 }; 
