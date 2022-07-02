@@ -44,12 +44,15 @@ export const getProduct = async (req, res, next) => {
     const product = await prisma.Product.findUnique({
         where: {
             id: productId
+        },
+        include: {
+            Category: true
         }
     });
 
-    if(!product) {
-        throw new Error('Product Not Found')
-    }
+    if (!product) {
+        throw new Error('Product Not Found');
+    };
 
     return res.status(200).json({
         success: true,
@@ -57,15 +60,21 @@ export const getProduct = async (req, res, next) => {
     });
 };
 
-export const patchProduct = async (req, res, next) => {
-
+export const deleteProduct = async (req, res, next) => {
+    const { productId } = req.body;
+    const deletedProduct = await prisma.Product.delete({
+        where: {
+            id: productId
+        }
+    });
 
     return res.status(200).json({
         success: true,
+        deletedProduct: deletedProduct
     });
 };
 
-export const deleteProduct = async (req, res, next) => {
+export const patchProduct = async (req, res, next) => {
 
 
     return res.status(200).json({
