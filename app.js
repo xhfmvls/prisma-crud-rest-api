@@ -3,14 +3,16 @@ import express, { urlencoded } from "express";
 import createError from "http-errors"; 
 import morgan from "morgan";
 import dotenv from "dotenv"; 
-dotenv.config()
+import "express-async-errors"; 
 
 // Declare other variables
+dotenv.config()
 const app = express(); 
 const PORT = process.env.PORT; 
 
 // Import Router
 import apiRouter from "./routes/api.js";
+import productRouter from "./routes/productRouter.js"; 
 
 // Import Middleware
 import ignoreFavicon from "./middleware/ignoreFavicon.js"; 
@@ -30,6 +32,7 @@ app.get('/', async(req, res, next) => {
 
 // Routers
 app.use('/api/v1', apiRouter); 
+app.use('/api/v1/product', productRouter); 
 
 // Not Found
 app.use((req, res, next) => {
